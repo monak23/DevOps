@@ -1,0 +1,14 @@
+# BAD docker-compose.yml
+services:
+  web:
+    build: .
+    image: webapp:latest
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:latest
+    environment: 
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+# по умолчанию одна сеть, оба сервиса "видят" друг друга по именам

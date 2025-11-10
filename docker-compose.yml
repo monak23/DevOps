@@ -1,0 +1,22 @@
+# GOOD docker-compose.yml
+services:
+  web:
+    build: .
+    image: webapp:1.0
+    ports:
+      - "8080:8080"
+    networks:
+      - front_net
+
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    networks:
+      - back_net
+
+networks:
+  front_net:
+    driver: bridge
+  back_net:
+    driver: bridge

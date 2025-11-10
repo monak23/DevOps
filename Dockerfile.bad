@@ -1,0 +1,18 @@
+# BAD Dockerfile
+FROM golang:latest
+
+WORKDIR /app
+
+# Плохая практика: apt команды разбиты по слоям
+RUN apt-get update
+RUN apt-get install -y curl
+
+# Плохая практика: ADD и копирование всего контекста
+ADD . /app
+
+# Плохая практика: сборка в одном этапе (без multi-stage)
+RUN go build -o app ./cmd/app
+
+EXPOSE 8080
+# Плохая практика: строковая форма CMD и запуск под root
+CMD go run ./cmd/app
